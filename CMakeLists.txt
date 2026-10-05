@@ -6,4 +6,5 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Génère compile_commands.json pour l'autocomplétion de VS Code
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+enable_testing()
 add_subdirectory(cpp)

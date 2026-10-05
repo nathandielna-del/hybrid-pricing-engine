@@ -13,3 +13,6 @@ add_executable(demo apps/main.cpp)
 target_compile_options(demo PRIVATE -Wall -Wextra -Wpedantic)
 # demo hérite automatiquement de l'include et du C++20 de pricer
 target_link_libraries(demo PRIVATE pricer)
+
+# --- Tests unitaires ---
+add_subdirectory(tests)
