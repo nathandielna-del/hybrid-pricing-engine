@@ -1,5 +1,5 @@
 # --- Librairie de pricing ---
-add_library(pricer src/core/Payoff.cpp src/math/NormalDistribution.cpp)
+add_library(pricer src/core/Payoff.cpp src/math/NormalDistribution.cpp src/models/BlackScholes.cpp)
 
 # PUBLIC : les utilisateurs de pricer (demo, tests, module Python) doivent trouver ses headers
 target_include_directories(pricer PUBLIC include)

@@ -8,7 +8,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 # Exécutable de tests, lié à notre librairie et à GoogleTest
-add_executable(pricer_tests test_Payoff.cpp test_NormalDistribution.cpp)
+add_executable(pricer_tests test_Payoff.cpp test_NormalDistribution.cpp test_BlackScholes.cpp)
 target_compile_options(pricer_tests PRIVATE -Wall -Wextra -Wpedantic)
 target_link_libraries(pricer_tests PRIVATE pricer GTest::gtest_main)
 
