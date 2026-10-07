@@ -8,7 +8,8 @@ TEST(NormalDistributionTest, CdfAtZeroIsOneHalf) {
 
 TEST(NormalDistributionTest, PdfMatchesReferenceValues) {
     EXPECT_NEAR(pricer::normalPdf(0.0), 0.3989422804014327, 1e-12);
-    EXPECT_NEAR(pricer::normalPdf(1.0), 0.24197072451914337, 1e-12);  // aurait détecté l'erreur d'exposant
+    EXPECT_NEAR(pricer::normalPdf(1.0), 0.24197072451914337,
+                1e-12);  // aurait détecté l'erreur d'exposant
 }
 
 TEST(NormalDistributionTest, CdfMatchesReferenceValues) {

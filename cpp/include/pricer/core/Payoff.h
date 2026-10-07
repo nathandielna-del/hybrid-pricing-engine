@@ -2,10 +2,10 @@
 
 namespace pricer {
 
-    [[nodiscard]] double callPayoff(double spot, double strike);
-    [[nodiscard]] double putPayoff(double spot, double strike);
+[[nodiscard]] double callPayoff(double spot, double strike);
+[[nodiscard]] double putPayoff(double spot, double strike);
 
-    class Payoff {
+class Payoff {
 public:
     virtual ~Payoff() = default;
 
@@ -42,6 +42,5 @@ public:
 private:
     double strike_;
 };
-
 
 }  // namespace pricer

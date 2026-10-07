@@ -22,8 +22,7 @@ VanillaTerms extractVanillaTerms(const Payoff& payoff) {
         "AnalyticBlackScholesEngine: only call and put payoffs are supported.");
 }
 
-BlackScholesParams makeParams(const BlackScholesModel& model,
-                              const VanillaOption& option,
+BlackScholesParams makeParams(const BlackScholesModel& model, const VanillaOption& option,
                               double strike) {
     return BlackScholesParams{
         .spot = model.spot(),

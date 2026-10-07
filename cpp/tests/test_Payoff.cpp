@@ -22,6 +22,7 @@ TEST(PayoffTest, PutOutOfTheMoney) {
 TEST(PayoffTest, CallMinusPutEqualsSpotMinusStrike) {
     const double strike = 100.0;
     for (const double spot : {50.0, 90.0, 100.0, 110.0, 150.0}) {
-        EXPECT_DOUBLE_EQ(pricer::callPayoff(spot, strike) - pricer::putPayoff(spot, strike), spot - strike);
+        EXPECT_DOUBLE_EQ(pricer::callPayoff(spot, strike) - pricer::putPayoff(spot, strike),
+                         spot - strike);
     }
 }

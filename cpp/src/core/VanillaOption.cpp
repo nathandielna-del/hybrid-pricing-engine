@@ -26,8 +26,7 @@ double validatedMaturity(double maturity) {
 }  // namespace
 
 VanillaOption::VanillaOption(std::shared_ptr<const Payoff> payoff, double maturity)
-    : payoff_{validatedPayoff(std::move(payoff))},
-      maturity_{validatedMaturity(maturity)} {}
+    : payoff_{validatedPayoff(std::move(payoff))}, maturity_{validatedMaturity(maturity)} {}
 
 const Payoff& VanillaOption::payoff() const noexcept {
     return *payoff_;  // never null: guaranteed by the constructor
