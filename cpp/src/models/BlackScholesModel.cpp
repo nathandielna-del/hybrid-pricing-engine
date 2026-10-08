@@ -49,4 +49,10 @@ double BlackScholesModel::forward(double maturity) const noexcept {
     return spot_ * std::exp(rate_ * maturity);
 }
 
+double BlackScholesModel::terminalSpot(double maturity, double gaussianDraw) const noexcept {
+    const double drift = (rate_ - 0.5 * volatility_ * volatility_) * maturity;
+    const double diffusion = volatility_ * std::sqrt(maturity) * gaussianDraw;
+    return spot_ * std::exp(drift + diffusion);
+}
+
 }  // namespace pricer
