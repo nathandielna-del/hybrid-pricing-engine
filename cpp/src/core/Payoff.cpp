@@ -46,4 +46,13 @@ double PutPayoff::strike() const noexcept {
     return strike_;
 }
 
+DigitalCallPayoff::DigitalCallPayoff(double strike) : strike_{validatedStrike(strike)} {}
+
+double DigitalCallPayoff::operator()(double spotAtMaturity) const {
+    return spotAtMaturity > strike_ ? 1.0 : 0.0;
+}
+double DigitalCallPayoff::strike() const noexcept {
+    return strike_;
+}
+
 }  // namespace pricer

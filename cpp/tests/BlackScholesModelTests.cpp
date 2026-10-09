@@ -77,4 +77,24 @@ TEST(BlackScholesModelTest, ErrorMessageNamesTheParameter) {
     }
 }
 
+TEST(BlackScholesModelTest, TerminalSpotWithZeroDrawIsDriftOnly) {
+    const pricer::BlackScholesModel model{100.0, 0.05, 0.20};
+    EXPECT_NEAR(model.terminalSpot(1.0, 0.0), 103.0454533953517, 1e-12);
+}
+
+TEST(BlackScholesModelTest, TerminalSpotWithPositiveDrawGoesUp) {
+    const pricer::BlackScholesModel model{100.0, 0.05, 0.20};
+    EXPECT_NEAR(model.terminalSpot(1.0, 1.0), 125.86000099294779, 1e-12);
+}
+
+TEST(BlackScholesModelTest, TerminalSpotWithNegativeDrawGoesDown) {
+    const pricer::BlackScholesModel model{100.0, 0.05, 0.20};
+    EXPECT_NEAR(model.terminalSpot(1.0, -1.0), 84.36648165963837, 1e-12);
+}
+
+TEST(BlackScholesModelTest, TerminalSpotScalesWithSquareRootOfMaturity) {
+    const pricer::BlackScholesModel model{100.0, 0.05, 0.20};
+    EXPECT_NEAR(model.terminalSpot(2.0, 1.5), 162.29801673524628, 1e-12);
+}
+
 }  // namespace

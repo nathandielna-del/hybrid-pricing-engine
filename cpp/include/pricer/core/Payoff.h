@@ -43,4 +43,16 @@ private:
     double strike_;
 };
 
+// Pays 1 if the spot at maturity is strictly above the strike, 0 otherwise ("cash-or-nothing").
+class DigitalCallPayoff final : public Payoff {
+public:
+    explicit DigitalCallPayoff(double strike);
+
+    [[nodiscard]] double operator()(double spotAtMaturity) const override;
+    [[nodiscard]] double strike() const noexcept;
+
+private:
+    double strike_;
+};
+
 }  // namespace pricer

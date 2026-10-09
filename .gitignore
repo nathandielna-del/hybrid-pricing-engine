@@ -26,3 +26,4 @@ dist/
 # Editor
 # =========================
 .vscode/
+build-release/

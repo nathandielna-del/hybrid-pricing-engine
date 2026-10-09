@@ -20,6 +20,11 @@ public:
     // S0 * exp(r * T). Precondition: maturity >= 0.
     [[nodiscard]] double forward(double maturity) const noexcept;
 
+    // Simulates the spot at maturity under the risk-neutral measure (exact GBM solution):
+    // S_T = S0 * exp((r - sigma^2 / 2) * T + sigma * sqrt(T) * Z).
+    // Precondition: maturity > 0 (already enforced by VanillaOption).
+    [[nodiscard]] double terminalSpot(double maturity, double gaussianDraw) const noexcept;
+
 private:
     double spot_;
     double rate_;
