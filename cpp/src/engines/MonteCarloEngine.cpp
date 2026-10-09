@@ -19,8 +19,11 @@ std::size_t validatedNumberOfPaths(std::size_t numberOfPaths) {
 }  // namespace
 
 MonteCarloEngine::MonteCarloEngine(const BlackScholesModel& model, std::size_t numberOfPaths,
-                                   std::uint64_t seed)
-    : model_{model}, numberOfPaths_{validatedNumberOfPaths(numberOfPaths)}, seed_{seed} {}
+                                   std::uint64_t seed, SamplingScheme scheme)
+    : model_{model},
+      numberOfPaths_{validatedNumberOfPaths(numberOfPaths)},
+      seed_{seed},
+      scheme_{scheme} {}
 
 std::size_t MonteCarloEngine::numberOfPaths() const noexcept {
     return numberOfPaths_;
@@ -28,6 +31,10 @@ std::size_t MonteCarloEngine::numberOfPaths() const noexcept {
 
 std::uint64_t MonteCarloEngine::seed() const noexcept {
     return seed_;
+}
+
+SamplingScheme MonteCarloEngine::scheme() const noexcept {
+    return scheme_;
 }
 
 double MonteCarloEngine::price(const VanillaOption& option) const {
@@ -40,7 +47,11 @@ MonteCarloResult MonteCarloEngine::simulate(const VanillaOption& option) const {
     double payoffSum = 0.0;
     double payoffSquaresSum = 0.0;
     for (std::size_t i = 0; i < numberOfPaths_; ++i) {
-        const double payoff = option.payoffAt(model_.terminalSpot(maturity, generator.next()));
+        const double z = generator.next();
+        const double payoff = scheme_ == SamplingScheme::Antithetic
+                                  ? 0.5 * (option.payoffAt(model_.terminalSpot(maturity, z)) +
+                                           option.payoffAt(model_.terminalSpot(maturity, -z)))
+                                  : option.payoffAt(model_.terminalSpot(maturity, z));
         payoffSum += payoff;
         payoffSquaresSum += payoff * payoff;
     }
